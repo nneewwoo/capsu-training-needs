@@ -1,0 +1,15 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "tasks": {
+    "package": {
+      "dependsOn": ["^package"],
+      "outputs": ["packages/*/dist/**"]
+    },
+    "dev": {
+      "persistent": true,
+      "cache": false,
+      "dependsOn": ["package", "^db:generate"]
+    }
+  },
+  "globalDependencies": [".env"]
+}

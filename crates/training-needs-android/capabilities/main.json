@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/android-schema.json",
+  "identifier": "main",
+  "description": "Capability for the Android",
+  "windows": ["main"],
+  "permissions": ["core:default", "shell:allow-open"]
+}

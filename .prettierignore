@@ -1,0 +1,6 @@
+target
+node_modules
+.svelte-kit
+.turbo
+dist
+crates/training-needs-android/gen/android

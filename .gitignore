@@ -1,0 +1,15 @@
+node_modules
+dist
+.svelte-kit
+.turbo
+.vercel
+
+target
+
+*.log
+
+db
+temp
+.env
+.env.*
+build

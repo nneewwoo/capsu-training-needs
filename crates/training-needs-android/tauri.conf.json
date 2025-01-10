@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "CAPSU Training Needs Dev",
+  "identifier": "training-needs.capsu.dev",
+  "build": {
+    "beforeDevCommand": "bun turbo dev",
+    "beforeBuildCommand": "bun build:android",
+    "frontendDist": "../../apps/android/build",
+    "devUrl": "http://localhost:14141"
+  },
+  "bundle": {
+    "active": false,
+    "category": "Survey",
+    "targets": "all",
+    "icon": [
+      "icons/dev/32x32.png",
+      "icons/dev/128x128.png",
+      "icons/dev/128x128@2x.png",
+      "icons/dev/icon.icns",
+      "icons/dev/icon.ico"
+    ]
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "title": "CAPSU Training Needs",
+        "label": "main"
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  }
+}

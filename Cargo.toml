@@ -1,0 +1,4 @@
+[workspace]
+members = ["crates/training-needs-android"]
+
+resolver = "2"

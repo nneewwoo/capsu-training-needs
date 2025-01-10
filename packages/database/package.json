@@ -1,0 +1,23 @@
+{
+  "name": "@training-needs/database",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "NODE_ENV=development bun --watch src/index.ts",
+    "build": "bun build.ts"
+  },
+  "devDependencies": {
+    "bun-plugin-dts": "^0.3.0",
+    "bun-types": "^1.1.43",
+    "prisma": "^6.2.1"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.2.1"
+  }
+}

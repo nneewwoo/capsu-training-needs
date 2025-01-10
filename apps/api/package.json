@@ -1,0 +1,23 @@
+{
+  "name": "@training-needs/api",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-vercel": "^5.5.2",
+    "@sveltejs/kit": "^2.15.2",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@tailwindcss/vite": "4.0.0-beta.9",
+    "svelte": "^5.16.6",
+    "svelte-check": "^4.1.1",
+    "tailwindcss": "4.0.0-beta.9",
+    "vite": "^6.0.7"
+  }
+}
