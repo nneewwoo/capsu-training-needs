@@ -1,3 +1,110 @@
 @import 'tailwindcss';
 
 @config '../tailwind.config.ts';
+
+@font-face {
+  font-family: 'Mona Sans';
+  font-style: normal;
+  font-weight: 200 900;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('/fonts/mona-sans.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  font-optical-sizing: auto;
+  src: url('/fonts/work-sans.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@theme {
+  --font-sans: 'Mona Sans', sans-serif;
+  --font-sans-secondary: 'Work Sans', sans-serif;
+  --color-primary: rgb(94 98 27);
+  --color-surface-tint: rgb(94 98 27);
+  --color-on-primary: rgb(255 255 255);
+  --color-primary-container: rgb(227 232 146);
+  --color-on-primary-container: rgb(27 29 0);
+  --color-secondary: rgb(95 96 68);
+  --color-on-secondary: rgb(255 255 255);
+  --color-secondary-container: rgb(229 229 192);
+  --color-on-secondary-container: rgb(27 29 7);
+  --color-tertiary: rgb(60 102 89);
+  --color-on-tertiary: rgb(255 255 255);
+  --color-tertiary-container: rgb(190 236 219);
+  --color-on-tertiary-container: rgb(0 32 24);
+  --color-error: rgb(186 26 26);
+  --color-on-error: rgb(255 255 255);
+  --color-error-container: rgb(255 218 214);
+  --color-on-error-container: rgb(65 0 2);
+  --color-background: rgb(252 250 236);
+  --color-on-background: rgb(28 28 20);
+  --color-surface: rgb(252 250 236);
+  --color-on-surface: rgb(28 28 20);
+  --color-surface-variant: rgb(229 227 210);
+  --color-on-surface-variant: rgb(71 71 59);
+  --color-outline: rgb(120 120 105);
+  --color-outline-variant: rgb(201 199 182);
+  --color-shadow: rgb(0 0 0);
+  --color-scrim: rgb(0 0 0);
+  --color-inverse-surface: rgb(49 49 40);
+  --color-inverse-on-surface: rgb(244 241 228);
+  --color-inverse-primary: rgb(199 204 121);
+  --color-primary-fixed: rgb(227 232 146);
+  --color-on-primary-fixed: rgb(27 29 0);
+  --color-primary-fixed-dim: rgb(199 204 121);
+  --color-on-primary-fixed-variant: rgb(70 74 2);
+  --color-secondary-fixed: rgb(229 229 192);
+  --color-on-secondary-fixed: rgb(27 29 7);
+  --color-secondary-fixed-dim: rgb(200 201 166);
+  --color-on-secondary-fixed-variant: rgb(71 73 46);
+  --color-tertiary-fixed: rgb(190 236 219);
+  --color-on-tertiary-fixed: rgb(0 32 24);
+  --color-tertiary-fixed-dim: rgb(163 208 191);
+  --color-on-tertiary-fixed-variant: rgb(36 78 66);
+  --color-surface-dim: rgb(221 218 205);
+  --color-surface-bright: rgb(252 250 236);
+  --color-surface-container-lowest: rgb(255 255 255);
+  --color-surface-container-low: rgb(246 244 231);
+  --color-surface-container: rgb(241 238 225);
+  --color-surface-container-high: rgb(235 232 219);
+  --color-surface-container-highest: rgb(229 227 214);
+
+  --ring-3 {
+    --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0
+      calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentColor);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow),
+      var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+}
+
+@layer base {
+  * {
+    @apply overscroll-none border-gray-200 focus:outline-0;
+  }
+
+  body {
+    @apply bg-surface text-on-surface;
+  }
+
+  a {
+    @apply underline decoration-1;
+  }
+
+  input:not([type='radio']):not([type='file']) {
+    @apply focus:ring-primary/20 focus:border-primary/30 w-full rounded-xl border px-4.5 py-4 text-sm transition-all ease-linear focus:ring-4;
+  }
+
+  button[type='button'] {
+    @apply bg-primary text-on-primary font-sans-secondary w-full cursor-pointer rounded-full border px-4.5 py-3.5 font-semibold;
+  }
+}
