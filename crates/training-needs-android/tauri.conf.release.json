@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Training Needs",
+  "productName": "CAPSU Training Needs",
   "identifier": "training-needs.capsu",
   "build": {
     "beforeBuildCommand": "[ $CI = true ] || bun build:android"

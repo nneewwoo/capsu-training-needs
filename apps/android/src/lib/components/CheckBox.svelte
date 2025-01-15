@@ -1,18 +1,25 @@
 <script lang="ts">
   let {
     id,
+    class: className,
     onchange = $bindable(),
     checked = $bindable()
-  }: { id: string; onchange: () => {}; checked: boolean } = $props()
+  }: {
+    id: string
+    class?: string
+    onchange?: () => {}
+    checked: boolean
+  } = $props()
 </script>
 
-<div class="group relative h-4.5 w-4.5 shrink-0">
+<div
+  class="group relative flex h-4.5 w-4.5 shrink-0 items-center justify-center">
   <input
     type="checkbox"
     {id}
     bind:checked
     {onchange}
-    class="text-primary peer checked:ring-primary/20 checked:bg-primary checked:border-primary/80 h-full w-full shrink-0 appearance-none rounded border bg-inherit p-0" />
+    class={`${className} text-primary peer checked:ring-primary/20 checked:bg-primary checked:border-primary/80 h-full w-full shrink-0 appearance-none rounded border bg-inherit p-0`} />
   <div
     class="group pointer-events-none absolute top-0 left-0 flex h-full w-full items-center justify-center">
     <svg

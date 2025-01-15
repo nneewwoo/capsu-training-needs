@@ -1,6 +1,9 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "tasks": {
+    "@training-needs/database#package": {
+      "outputs": ["dist/**"]
+    },
     "package": {
       "dependsOn": ["^package"],
       "outputs": ["packages/*/dist/**"]
@@ -8,7 +11,11 @@
     "dev": {
       "persistent": true,
       "cache": false,
-      "dependsOn": ["package", "^db:generate"]
+      "dependsOn": ["package"]
+    },
+    "build": {
+      "outputs": ["dist/**"],
+      "dependsOn": ["package"]
     }
   },
   "globalDependencies": [".env"]

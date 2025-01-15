@@ -26,9 +26,21 @@
     U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url('/fonts/source-serif-4.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 @theme {
   --font-sans: 'Mona Sans', sans-serif;
-  --font-sans-secondary: 'Work Sans', sans-serif;
+  --font-work: 'Work Sans', sans-serif;
+  --font-serif: 'Source Serif 4', serif;
   --color-primary: rgb(94 98 27);
   --color-surface-tint: rgb(94 98 27);
   --color-on-primary: rgb(255 255 255);
@@ -46,6 +58,10 @@
   --color-on-error: rgb(255 255 255);
   --color-error-container: rgb(255 218 214);
   --color-on-error-container: rgb(65 0 2);
+  --color-success: rgb(34 197 94);
+  --color-on-success: rgb(255 255 255);
+  --color-info: rgb(59 130 246);
+  --color-on-info: rgb(255 255 255);
   --color-background: rgb(252 250 236);
   --color-on-background: rgb(28 28 20);
   --color-surface: rgb(252 250 236);
@@ -89,22 +105,24 @@
 
 @layer base {
   * {
-    @apply overscroll-none border-gray-200 focus:outline-0;
+    @apply overscroll-none border-gray-200 select-none focus:outline-0;
   }
 
   body {
     @apply bg-surface text-on-surface;
   }
 
-  a {
-    @apply underline decoration-1;
-  }
-
-  input:not([type='radio']):not([type='file']) {
+  input:not([type='radio']):not([type='file']),
+  textarea {
     @apply focus:ring-primary/20 focus:border-primary/30 w-full rounded-xl border px-4.5 py-4 text-sm transition-all ease-linear focus:ring-4;
   }
 
+  button {
+    @apply cursor-pointer;
+  }
+
+  a[role='button'],
   button[type='button'] {
-    @apply bg-primary text-on-primary font-sans-secondary w-full cursor-pointer rounded-full border px-4.5 py-3.5 font-semibold;
+    @apply bg-primary disabled:bg-primary/50 text-on-primary w-full cursor-pointer rounded-full border px-4.5 py-3.5 font-semibold;
   }
 }

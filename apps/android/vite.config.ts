@@ -1,12 +1,21 @@
 import { sveltekit } from '@sveltejs/kit/vite'
 import tailwindcss from '@tailwindcss/vite'
+import { internalIpV4Sync } from 'internal-ip'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [sveltekit(), tailwindcss()],
+  clearScreen: false,
   server: {
     host: true,
-    port: 14141
+    strictPort: true,
+    port: 14141,
+    hmr: {
+      protocol: 'ws',
+      port: 14142,
+      host: internalIpV4Sync()
+    }
   },
-  envDir: '../../'
+  envDir: '../../',
+  envPrefix: ['VITE_', 'TAURI_']
 })

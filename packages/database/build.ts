@@ -1,6 +1,6 @@
+import packageJson from './package.json'
 import { $ } from 'bun'
 import dts from 'bun-plugin-dts'
-import packageJson from './package.json'
 
 await $`rm -rf dist`
 

@@ -1,0 +1,253 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_DIRECT_URL")
+  schemas   = ["base", "reference", "generic_types"]
+}
+
+enum FeedbackType {
+  RATING
+  TEXT
+
+  @@schema("generic_types")
+}
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// -----------------------------------------------------------------------------------------------------------
+//
+// START: Reference Schema
+//
+// -----------------------------------------------------------------------------------------------------------
+
+model Course {
+  id        String            @id @default(uuid())
+  createdAt DateTime          @default(now()) @map("created_at")
+  title     String
+  seminars  TrainingSeminar[]
+
+  @@map("courses")
+  @@schema("reference")
+}
+
+model TrainingSeminar {
+  id          String                    @id @default(uuid())
+  createdAt   DateTime                  @default(now()) @map("created_at")
+  title       String
+  description String
+  questions   TrainingSeminarQuestion[]
+  course      Course                    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId    String                    @map("course_id")
+
+  @@map("training_seminars")
+  @@schema("reference")
+}
+
+model TrainingSeminarQuestion {
+  id        String                          @id @default(uuid())
+  createdAt DateTime                        @default(now()) @map("created_at")
+  text      String
+  seminar   TrainingSeminar                 @relation(fields: [seminarId], references: [id], onDelete: Cascade)
+  seminarId String
+  options   TrainingSeminarQuestionOption[]
+
+  @@map("training_seminar_questions")
+  @@schema("reference")
+}
+
+model TrainingSeminarQuestionOption {
+  id         String                  @id @default(uuid())
+  createdAt  DateTime                @default(now()) @map("created_at")
+  label      String
+  question   TrainingSeminarQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionId String
+  isCorrect  Boolean                 @default(false) @map("is_correct")
+
+  @@map("training_seminar_question_options")
+  @@schema("reference")
+}
+
+model FeedbackCategory {
+  id          String             @id @default(uuid())
+  createdAt   DateTime           @default(now()) @map("created_at")
+  title       String
+  description String
+  questions   FeedbackQuestion[]
+
+  @@map("feedback_categories")
+  @@schema("reference")
+}
+
+model FeedbackQuestion {
+  id         String           @id @default(uuid())
+  createdAt  DateTime         @default(now()) @map("created_at")
+  text       String
+  category   FeedbackCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId String           @map("category_id")
+  type       FeedbackType
+
+  @@map("feedback_questions")
+  @@schema("reference")
+}
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// -----------------------------------------------------------------------------------------------------------
+//
+// START: Base Schema
+//
+// -----------------------------------------------------------------------------------------------------------
+
+model BaseCycle {
+  id                String                 @id @default(uuid())
+  createdAt         DateTime               @default(now()) @map("created_at")
+  startDate         DateTime               @default(now()) @map("start_date")
+  endDate           DateTime               @map("end_date")
+  period            Int                    @default(0) @map("period")
+  active            Boolean                @default(false) @map("is_active")
+  seminars          BaseTrainingSeminar[]
+  votes             BaseVote[]
+  participations    BaseParticipation[]
+  pretestResponses  BasePretestResponse[]
+  posttestResponses BasePosttestResponse[]
+  feedbackResponses BaseFeedbackResponse[]
+
+  @@map("cycles")
+  @@schema("base")
+}
+
+model BaseTrainingSeminar {
+  id          String                        @id @default(uuid())
+  createdAt   DateTime                      @default(now()) @map("created_at")
+  title       String                        @map("title")
+  description String                        @map("description")
+  courseTitle String                        @map("course_title")
+  questions   BaseTrainingSeminarQuestion[]
+  votes       BaseVote[]
+  cycle       BaseCycle                     @relation(fields: [cycleId], references: [id], onDelete: Cascade)
+  cycleId     String                        @map("cycle_id")
+  rank        Int                           @default(0) @map("rank")
+  isWinner    Boolean                       @default(false) @map("is_winner")
+
+  @@map("training_seminars")
+  @@schema("base")
+}
+
+model BaseTrainingSeminarQuestion {
+  id        String                              @id @default(uuid())
+  createdAt DateTime                            @default(now()) @map("created_at")
+  text      String                              @map("text")
+  seminar   BaseTrainingSeminar                 @relation(fields: [seminarId], references: [id], onDelete: Cascade)
+  seminarId String                              @map("seminar_id")
+  options   BaseTrainingSeminarQuestionOption[]
+
+  @@map("training_seminar_questions")
+  @@schema("base")
+}
+
+model BaseTrainingSeminarQuestionOption {
+  id         String                      @id @default(uuid())
+  createdAt  DateTime                    @default(now()) @map("created_at")
+  label      String                      @map("label")
+  question   BaseTrainingSeminarQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionId String                      @map("question_id")
+  isCorrect  Boolean                     @default(false) @map("is_correct")
+
+  @@map("training_seminar_question_options")
+  @@schema("base")
+}
+
+model BaseParticipation {
+  id          String    @id @default(uuid())
+  createdAt   DateTime  @default(now()) @map("created_at")
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String    @unique @map("user_id")
+  cycle       BaseCycle @relation(fields: [cycleId], references: [id], onDelete: Cascade)
+  cycleId     String    @map("cycle_id")
+  didVote     Boolean   @default(false) @map("did_vote")
+  didAttend   Boolean   @default(false) @map("did_attend")
+  didPretest  Boolean   @default(false) @map("did_pretest")
+  didPosttest Boolean   @default(false) @map("did_posttest")
+
+  @@map("user_participations")
+  @@schema("base")
+}
+
+model BaseVote {
+  id        String              @id @default(uuid())
+  createdAt DateTime            @default(now()) @map("created_at")
+  user      User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String              @map("user_id")
+  value     Int                 @default(0)
+  seminar   BaseTrainingSeminar @relation(fields: [seminarId], references: [id], onDelete: Cascade)
+  seminarId String              @map("seminar_id")
+  cycle     BaseCycle           @relation(fields: [cycleId], references: [id], onDelete: Cascade)
+  cycleId   String              @map("cycle_id")
+
+  @@map("votes")
+  @@schema("base")
+}
+
+model BasePretestResponse {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String    @map("user_id")
+  cycle     BaseCycle @relation(fields: [cycleId], references: [id], onDelete: Cascade)
+  cycleId   String    @map("cycle_id")
+  score     Int       @default(0)
+
+  @@map("pretest_responses")
+  @@schema("base")
+}
+
+model BasePosttestResponse {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @map("created_at")
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String    @map("user_id")
+  cycle     BaseCycle @relation(fields: [cycleId], references: [id], onDelete: Cascade)
+  cycleId   String    @map("cycle_id")
+  score     Int       @default(0)
+
+  @@map("posttest_responses")
+  @@schema("base")
+}
+
+model BaseFeedbackResponse {
+  id               String       @id @default(uuid())
+  createdAt        DateTime     @default(now()) @map("created_at")
+  user             User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId           String       @map("user_id")
+  cycle            BaseCycle    @relation(fields: [cycleId], references: [id], onDelete: Cascade)
+  cycleId          String       @map("cycle_id")
+  feedbackQuestion String       @map("feedback_question")
+  feedback         String       @map("feedback")
+  type             FeedbackType @map("type")
+
+  @@map("feedback_responses")
+  @@schema("base")
+}
+
+model User {
+  id                String                 @id @unique
+  email             String                 @unique
+  name              String?
+  photo             String?                @map("photo_url")
+  isDummy           Boolean                @default(false) @map("is_dummy")
+  participations    BaseParticipation[]
+  votes             BaseVote[]
+  pretestResponses  BasePretestResponse[]
+  posttestResponses BasePosttestResponse[]
+  feedbackResponses BaseFeedbackResponse[]
+
+  @@map("users")
+  @@schema("base")
+}
+
+// -----------------------------------------------------------------------------------------------------------

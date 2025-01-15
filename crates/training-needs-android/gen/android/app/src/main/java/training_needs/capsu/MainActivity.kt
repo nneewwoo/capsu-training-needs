@@ -1,3 +1,3 @@
-package training_needs.capsu.dev
+package training_needs.capsu
 
 class MainActivity : TauriActivity()

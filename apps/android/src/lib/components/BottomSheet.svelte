@@ -12,9 +12,19 @@
 </script>
 
 {#if open}
-  <div in:fade out:fade class="absolute top-0 left-0 h-full w-full bg-black/50">
+  <div
+    role="button"
+    tabindex="0"
+    onkeydown={() => {}}
+    onclick={() => onclose()}
+    in:fade
+    out:fade
+    class="fixed top-0 left-0 z-[998] h-full w-full bg-black/50">
   </div>
-  <div class="absolute bottom-0 left-0 h-fit w-full" in:slide out:slide>
+  <div
+    class="absolute bottom-0 left-0 z-[999] h-fit max-h-screen w-full overflow-hidden"
+    in:slide
+    out:slide>
     <div class="bg-surface h-full w-full rounded-t-4xl px-12 py-8">
       <div class="flex w-full justify-end">
         <button

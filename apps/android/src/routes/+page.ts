@@ -14,11 +14,7 @@ export const load: PageLoad = async () => {
 
   if (!session) {
     redirect(302, '/auth/signin')
-  } else {
-    const { user } = session
-
-    return {
-      user
-    }
   }
+
+  redirect(308, '/private')
 }
