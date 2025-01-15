@@ -29,8 +29,6 @@ app.post('/auth/v1/callback', async ({ req }) => {
     'onauthrequest',
     JSON.stringify({ refresh_token, access_token })
   )
-
-  console.log({ refresh_token, access_token })
 })
 
 app.get(
