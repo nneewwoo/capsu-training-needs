@@ -5,10 +5,28 @@
   import { signInWithOAuth, supabase } from '$lib/supabase'
   import { notify } from '$lib/store'
   import { Divider } from '$lib/components'
-  import { invalidate } from '$app/navigation'
+  import { goto, invalidate } from '$app/navigation'
+  import type { BaseCycle } from '@training-needs/database'
 
   let email = $state('')
   let password = $state('')
+
+  const gotoSignup = async () => {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/v1/cycles/current`,
+      {
+        method: 'GET'
+      }
+    )
+
+    const cycle = (await response.json()) as BaseCycle
+
+    if (cycle) {
+      notify('Sign up is disabled for now', 'error')
+    } else {
+      goto('/auth/signup')
+    }
+  }
 </script>
 
 <div
@@ -95,7 +113,8 @@
     </div>
     <div class="flex w-full justify-center text-sm">
       <p class="text-tertiary">Don&apos;t have an account?&nbsp;</p>
-      <a href="/auth/signup" class="underline decoration-1">Sign up</a>
+      <button onclick={gotoSignup} class="underline decoration-1"
+        >Sign up</button>
     </div>
   </div>
 </div>

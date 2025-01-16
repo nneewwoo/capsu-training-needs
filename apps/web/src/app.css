@@ -105,6 +105,14 @@
 
 @layer base {
   * {
-    @apply border-primary/30 overscroll-none focus:outline-0;
+    @apply border-primary/30 selection:bg-primary selection:text-surface overscroll-none focus:outline-0;
+  }
+
+  body {
+    @apply bg-surface;
+  }
+
+  a {
+    @apply text-on-surface font-medium underline decoration-1;
   }
 }

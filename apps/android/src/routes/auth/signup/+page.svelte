@@ -6,6 +6,7 @@
   import Divider from '$lib/components/Divider.svelte'
   import { signInWithOAuth, supabase } from '$lib/supabase'
   import { notify } from '$lib/store'
+  import { open } from '@tauri-apps/plugin-shell'
 
   let isSignupWithEmail: boolean = $state(false)
   let isLegalAgreementChecked: boolean = $state(false)
@@ -13,6 +14,14 @@
   let email: string = $state('')
   let full_name: string = $state('')
   let password: string = $state('')
+
+  const openPrivacy = async () => {
+    await open(`${import.meta.env.VITE_MAIN_DOMAIN_URL}/privacy-policy`)
+  }
+
+  const openTerms = async () => {
+    await open(`${import.meta.env.VITE_MAIN_DOMAIN_URL}/terms-of-use`)
+  }
 </script>
 
 <div
@@ -71,12 +80,14 @@
               I agree with Training Needs’
               <button
                 role="link"
+                onclick={openTerms}
                 class="text-on-surface text-wrap underline decoration-1">
                 Terms of Service
               </button>
               and
               <button
                 role="link"
+                onclick={openPrivacy}
                 class="text-on-surface text-wrap underline decoration-1">
                 Privacy Policy
               </button>
@@ -164,11 +175,16 @@
     <div class="w-full space-y-4 pt-8 text-center text-sm">
       <p class="text-tertiary text-xs">
         By creating an account you agree with our
-        <button role="link" class="text-on-surface underline decoration-1"
+        <button
+          role="link"
+          onclick={openTerms}
+          class="text-on-surface underline decoration-1"
           >Terms of Service</button>
         and our
-        <button role="link" class="text-on-surface underline decoration-1"
-          >Privacy Policy</button
+        <button
+          role="link"
+          onclick={openPrivacy}
+          class="text-on-surface underline decoration-1">Privacy Policy</button
         >.
       </p>
       <p class="text-tertiary">

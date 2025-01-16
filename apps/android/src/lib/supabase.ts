@@ -41,7 +41,10 @@ export const signInWithOAuth = async (provider: Provider) => {
     })
   } else {
     await supabase.auth.signInWithOAuth({
-      provider
+      provider,
+      options: {
+        redirectTo: 'http://192.168.254.106:14141'
+      }
     })
   }
 }
