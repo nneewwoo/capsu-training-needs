@@ -20,3 +20,5 @@ export const notify = (
     })
   }, 3000)
 }
+
+export const transitioning = writable<boolean>(true)

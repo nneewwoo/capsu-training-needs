@@ -1,1 +1,1 @@
-{"main":{"identifier":"main","description":"Capability for the Android","local":true,"windows":["main"],"permissions":["core:default","shell:allow-open"]}}
+{"main":{"identifier":"main","description":"Capability for the Android","local":true,"windows":["main"],"permissions":["core:default","shell:allow-open","oauth:allow-start","oauth:allow-cancel"]}}

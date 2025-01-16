@@ -1,7 +1,7 @@
 <div
   class="flex h-screen w-screen items-center justify-center overflow-hidden overscroll-none">
   <div
-    class="bg-secondary-container flex w-full max-w-sm flex-col items-center border p-8 shadow-md">
+    class="bg-secondary-container flex w-full max-w-sm flex-col items-center rounded-xl border p-8 shadow-md">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state'
+  import { fly } from 'svelte/transition'
 
   const unknownErrorTitles = [
     'Oops!',
@@ -38,6 +39,8 @@
 </script>
 
 <div
+  in:fly={{ x: 1000, delay: 200 }}
+  out:fly={{ x: -1000 }}
   class="flex h-full min-h-screen w-full flex-col items-center justify-center px-8">
   <h1 class="pb-8 text-center font-serif text-5xl font-semibold">
     {page.error?.message.toLocaleLowerCase().includes('unknown')

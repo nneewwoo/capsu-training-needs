@@ -1,6 +1,6 @@
 {
   "extends": [
-    "./dist/tsconfig.json",
+    "./.svelte-kit/tsconfig.json",
     "../tsconfig.base.json"
   ]
 }

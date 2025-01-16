@@ -1,6 +1,7 @@
 <script lang="ts">
   import { CheckBox } from '$lib/components/index.js'
   import { ChevronRight } from '$lib/icons'
+  import { fly } from 'svelte/transition'
 
   let { data } = $props()
 
@@ -22,7 +23,10 @@
   <title>Feedback</title>
 </svelte:head>
 
-<div class="h-fit w-full py-2">
+<div
+  in:fly={{ x: 1000, delay: 200 }}
+  out:fly={{ x: -1000 }}
+  class="h-fit w-full py-2">
   <div class="w-full pb-8">
     <h1 class="text-center font-serif text-2xl font-bold">
       {titles[Math.floor(Math.random() * titles.length)]}

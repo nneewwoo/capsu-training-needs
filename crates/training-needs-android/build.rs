@@ -12,7 +12,7 @@ fn main() {
     .unwrap()
     .join("apps")
     .join("android")
-    .join("dist");
+    .join("build");
   if !build_dir.exists() {
     // NOTE(qix-): Do not use `create_dir_all` here - the parent directory
     // NOTE(qix-): already exists, and we want to fail if not (for some reason).

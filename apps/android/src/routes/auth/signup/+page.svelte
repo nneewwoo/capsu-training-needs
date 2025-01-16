@@ -92,7 +92,8 @@
                   options: {
                     data: {
                       full_name
-                    }
+                    },
+                    emailRedirectTo: `${import.meta.env.VITE_MAIN_DOMAIN_URL}/auth/verified`
                   }
                 })
                 notify(
