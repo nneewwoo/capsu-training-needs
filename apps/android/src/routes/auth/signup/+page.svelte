@@ -104,7 +104,7 @@
                     data: {
                       full_name
                     },
-                    emailRedirectTo: `${import.meta.env.VITE_MAIN_DOMAIN_URL}/auth/verified`
+                    emailRedirectTo: `https://capsu-training-needs.tech/auth/verified`
                   }
                 })
                 notify(
