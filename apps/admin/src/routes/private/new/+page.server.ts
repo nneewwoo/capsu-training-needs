@@ -59,7 +59,7 @@ export const actions: Actions = {
       data: {
         period: 0,
         active: true,
-        endDate: new Date(Date.now() + 1000 * 60 * 30),
+        endDate: new Date(Date.now() + 1000 * 60 * 10),
         seminars: {
           create: seminars.map((s) => {
             return {

@@ -3,11 +3,6 @@ import { prisma } from '../src'
 import chalk from 'chalk'
 
 export const seedVotes = async () => {
-  const cycle = await prisma.baseCycle.findFirst({
-    where: {
-      active: true
-    }
-  })
   const users = await prisma.user.findMany({
     where: { isDummy: true }
   })
@@ -32,13 +27,18 @@ export const seedVotes = async () => {
       })
     }
 
-    await prisma.baseParticipation.update({
+    const participation = await prisma.baseParticipation.findFirst({
       where: {
         userId: user.id,
         cycle: {
           active: true
-        },
-        cycleId: cycle?.id
+        }
+      }
+    })
+
+    await prisma.baseParticipation.update({
+      where: {
+        id: participation?.id
       },
       data: {
         didVote: true

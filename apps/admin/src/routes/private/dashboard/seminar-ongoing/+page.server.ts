@@ -35,7 +35,7 @@ export const actions: Actions = {
       },
       data: {
         period: 3,
-        endDate: new Date(Date.now() + 1000 * 60 * 30)
+        endDate: new Date(Date.now() + 1000 * 60 * 10)
       }
     })
 
@@ -46,11 +46,18 @@ export const actions: Actions = {
 
     const userId = form.get('userId') as string
 
-    await prisma.baseParticipation.update({
+    const participation = await prisma.baseParticipation.findFirst({
       where: {
+        userId,
         cycle: {
           active: true
-        },
+        }
+      }
+    })
+
+    await prisma.baseParticipation.update({
+      where: {
+        id: participation?.id,
         userId
       },
       data: {

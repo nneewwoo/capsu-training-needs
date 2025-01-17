@@ -102,7 +102,7 @@ export const actions: Actions = {
       },
       data: {
         period: 1,
-        endDate: new Date(Date.now() + 1000 * 60 * 30)
+        endDate: new Date(Date.now() + 1000 * 60 * 10)
       }
     })
 

@@ -30,7 +30,8 @@ export const actions: Actions = {
         id: cycleId
       },
       data: {
-        active: false
+        active: false,
+        endDate: new Date(Date.now())
       }
     })
     redirect(308, '/')
