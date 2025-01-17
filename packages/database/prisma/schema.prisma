@@ -166,7 +166,7 @@ model BaseParticipation {
   id          String    @id @default(uuid())
   createdAt   DateTime  @default(now()) @map("created_at")
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      String    @unique @map("user_id")
+  userId      String    @map("user_id")
   cycle       BaseCycle @relation(fields: [cycleId], references: [id], onDelete: Cascade)
   cycleId     String    @map("cycle_id")
   didVote     Boolean   @default(false) @map("did_vote")

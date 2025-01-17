@@ -17,11 +17,6 @@ export const load: LayoutServerLoad = async () => {
 
   return {
     users,
-    cycle: cycle || {
-      id: '',
-      period: 99,
-      active: false,
-      endDate: new Date(Date.now() - 1000 * 60)
-    }
+    cycle
   }
 }

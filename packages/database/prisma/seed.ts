@@ -12,11 +12,6 @@ const rl = readline.createInterface({
 rl.question(
   chalk.cyan(
     `[1] Generate Users
-[2] Generate Votes
-[3] Generate Pretest
-[4] Generate Attendance
-[5] Generate Posttest
-[6] Generate Feedbacks
 
 Enter: `
   ),

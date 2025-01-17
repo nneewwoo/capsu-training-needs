@@ -20,7 +20,7 @@
             <h1 class="text-center text-sm font-bold">No ongoing events</h1>
           </div>
           <div class="mt-4 flex w-full justify-end">
-            <a role="button" href="/private/new">Start</a>
+            <a role="button" class="text-center" href="/private/new">Start</a>
           </div>
         </div>
       </div>
