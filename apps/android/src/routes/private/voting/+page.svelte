@@ -71,7 +71,7 @@
       }
     )
 
-    if (response.ok) {
+    if (response) {
       invalidate(
         `${import.meta.env.VITE_API_URL}/api/v1/participations/current`
       )

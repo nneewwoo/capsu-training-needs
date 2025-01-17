@@ -30,7 +30,7 @@ export const actions: Actions = {
         id: cycleId
       },
       data: {
-        period: 4,
+        period: 2,
         endDate: new Date(Date.now() + 1000 * 60 * 60 * 72)
       }
     })

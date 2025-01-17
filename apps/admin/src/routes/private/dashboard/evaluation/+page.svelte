@@ -81,7 +81,7 @@
           <div class="flex items-center border-t py-2 text-xs">
             <p class="w-3/6 font-medium">{response.feedbackQuestion}</p>
             <p class="w-1/6 font-medium">
-              {response.type === 'RATING' && response.feedback}
+              {response.type === 'RATING' ? response.feedback : 'N/A'}
             </p>
             <p class="w-3/6 font-medium">
               {response.type === 'TEXT' ? response.feedback : 'N/A'}
