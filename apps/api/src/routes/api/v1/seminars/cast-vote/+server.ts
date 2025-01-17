@@ -16,25 +16,25 @@ export const POST: RequestHandler = async ({ request }) => {
         value: seminar.rank
       }
     })
-
-    const participation = await prisma.baseParticipation.findFirst({
-      where: {
-        userId,
-        cycle: {
-          active: true
-        }
-      }
-    })
-
-    await prisma.baseParticipation.update({
-      where: {
-        id: participation?.id
-      },
-      data: {
-        didVote: true
-      }
-    })
   }
 
-  return new Response(null, { status: 204, statusText: 'ok' })
+  const participation = await prisma.baseParticipation.findFirst({
+    where: {
+      userId,
+      cycle: {
+        active: true
+      }
+    }
+  })
+
+  await prisma.baseParticipation.update({
+    where: {
+      id: participation?.id
+    },
+    data: {
+      didVote: true
+    }
+  })
+
+  return new Response(null, { status: 200, statusText: 'ok' })
 }
