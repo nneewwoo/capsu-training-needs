@@ -48,7 +48,7 @@
       </div>
     </div>
     <div class="absolute bottom-0 left-0 w-full p-2 px-4">
-      <a href="/auth/logout" class="flex items-center space-x-2">
+      <a href="/auth/signout" class="flex items-center space-x-2">
         <LogOutIcon size="16" />
         <span>Logout</span>
       </a>
