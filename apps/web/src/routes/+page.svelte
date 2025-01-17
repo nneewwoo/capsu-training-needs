@@ -5,6 +5,9 @@
   let { data } = $props()
 </script>
 
+<svelte:head>
+  <title>CAPSU Training Needs</title>
+</svelte:head>
 <div class="h-fit w-full">
   <div
     class="relative flex min-h-screen w-full items-center justify-center overflow-hidden">
@@ -31,7 +34,7 @@
     <GridPattern
       width={80}
       height={80}
-      fillColor="rgb(94 98 27 / 0.8)"
+      fillColor="rgb(94 98 27 / 0.5)"
       strokeDashArray="4 4"
       class={cn(
         '[mask-image:radial-gradient(960px_circle_at_center,white,transparent)]'

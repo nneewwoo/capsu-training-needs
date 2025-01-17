@@ -15,7 +15,7 @@ export const main = async () => {
     data: {
       period: 0,
       active: true,
-      endDate: new Date(Date.now() + 1000 * 60 * 30),
+      endDate: new Date(Date.now() + 1000 * 60 * 1),
       seminars: {
         create: seminars.map((s) => {
           console.log(

@@ -3,8 +3,7 @@ import {
   randFirstName,
   randLastName,
   randUuid as uuidv4,
-  randEmail,
-  randAvatar
+  randEmail
 } from '@ngneat/falso'
 import chalk from 'chalk'
 
@@ -23,7 +22,6 @@ export const seedUsers = async (n: number) => {
           provider: 'student.capsu',
           suffix: 'edu.ph'
         }),
-        photo: randAvatar({ size: 50 }),
         isDummy: true
       }
     })

@@ -1,4 +1,8 @@
-<div class="prose-2xl mx-auto w-full max-w-4xl py-16">
+<svelte:head>
+  <title>Privacy Policy | CAPSU Training Needs</title>
+</svelte:head>
+
+<div class="prose-2xl mx-auto w-full max-w-4xl py-16 max-lg:px-8">
   <div
     class="prose prose-li:text-tertiary prose-p:text-tertiary text-on-surface h-fit w-full">
     <h1>Privacy Policy</h1>
