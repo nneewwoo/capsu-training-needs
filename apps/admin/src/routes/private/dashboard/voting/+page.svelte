@@ -3,10 +3,13 @@
   import { notify } from '$lib/store.js'
   import type { BaseTrainingSeminar } from '@training-needs/database'
   import { Select } from 'bits-ui'
-  import { CheckIcon, ChevronDownIcon } from 'lucide-svelte'
+  import { DateInput } from 'date-picker-svelte'
+  import { Calendar1Icon, CheckIcon, ChevronDownIcon } from 'lucide-svelte'
   import { slide } from 'svelte/transition'
 
   let { data, form } = $props()
+
+  let date = $state(new Date(Date.now()))
 
   let seminars = $state(data.seminars)
 
@@ -50,6 +53,7 @@
   })
 
   $effect(() => {
+    date.setMinutes(date.getMinutes() + 30)
     const VOTING_CHANNEL = data.supabase
       .channel('voting')
       .on(
@@ -133,10 +137,18 @@
       <div class="flex flex-col">
         <div
           class="bg-secondary-container flex w-full flex-col rounded-xl border p-2">
-          <h1 class="pb-4 text-center text-sm font-bold">
-            Users are voting for seminar topics
-          </h1>
-          <h1 class="text-center text-5xl font-bold">{countdown}</h1>
+          {#if countdown !== '--:--:--'}
+            <h1 class="pb-4 text-center text-sm font-bold">
+              Users are voting for seminar topics
+            </h1>
+            <h1 class="text-center text-5xl font-bold">{countdown}</h1>
+          {:else}
+            <p class="text-base font-medium">Ends at</p>
+            <div class="flex items-center space-x-2">
+              <Calendar1Icon size={16} />
+              <DateInput bind:value={date} />
+            </div>
+          {/if}
         </div>
         <form
           action="?/change-period"
@@ -177,6 +189,7 @@
             </Select.Root>
           {/if}
           <input type="hidden" name="winner" value={selectedAsWinner} />
+          <input type="hidden" name="date" value={date} />
           <button
             class="disabled:cursor-not-allowed"
             disabled={countdown !== '--:--:--'}

@@ -27,6 +27,7 @@ export const actions: Actions = {
     const form = await request.formData()
 
     const cycleId = form.get('cycleId') as string
+    const date = form.get('date') as unknown as Date
 
     await prisma.baseCycle.update({
       where: {
@@ -35,7 +36,7 @@ export const actions: Actions = {
       },
       data: {
         period: 3,
-        endDate: new Date(Date.now() + 1000 * 60 * 10)
+        endDate: new Date(date)
       }
     })
 

@@ -20,6 +20,8 @@ export const actions: Actions = {
       form.get('selection') as string
     ) as TrainingSeminar[]
 
+    const date = form.get('date') as unknown as Date
+
     if (!selection.length) {
       return {
         status: 403,
@@ -59,7 +61,7 @@ export const actions: Actions = {
       data: {
         period: 0,
         active: true,
-        endDate: new Date(Date.now() + 1000 * 60 * 10),
+        endDate: new Date(date),
         seminars: {
           create: seminars.map((s) => {
             return {

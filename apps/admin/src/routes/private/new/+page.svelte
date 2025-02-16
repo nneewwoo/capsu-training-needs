@@ -2,15 +2,19 @@
   import { enhance } from '$app/forms'
   import { notify } from '$lib/store'
   import type { TrainingSeminar } from '@training-needs/database'
-  import { Trash2Icon } from 'lucide-svelte'
+  import { Trash2Icon, Calendar1Icon } from 'lucide-svelte'
+  import { DateInput } from 'date-picker-svelte'
 
   let { data, form } = $props()
+
+  let date = $state(new Date(Date.now()))
 
   let seminars = $state(data.seminars)
 
   let selection: TrainingSeminar[] = $state([])
 
   $effect(() => {
+    date.setMinutes(date.getMinutes() + 30)
     if (form && form.error) {
       notify(form.error, 'error')
     } else if (form && form.message) {
@@ -61,6 +65,12 @@
                 </p>
               </div>
             {/each}
+
+            <p class="text-base font-medium">Ends at</p>
+            <div class="flex items-center space-x-2">
+              <Calendar1Icon size={16} />
+              <DateInput bind:value={date} />
+            </div>
           {/if}
         </div>
       </div>
@@ -69,6 +79,7 @@
           type="hidden"
           name="selection"
           value={JSON.stringify(selection)} />
+        <input type="hidden" name="date" value={date} />
         <button type="submit">Start</button>
       </form>
     </div>

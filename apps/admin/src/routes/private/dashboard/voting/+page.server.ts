@@ -63,6 +63,7 @@ export const actions: Actions = {
     const form = await request.formData()
 
     const selectedWinner = form.get('winner') as string
+    const date = form.get('date') as unknown as Date
 
     const tiedSeminars = seminars.filter(
       (seminar) => seminar.rank === seminars[0].rank
@@ -102,7 +103,7 @@ export const actions: Actions = {
       },
       data: {
         period: 1,
-        endDate: new Date(Date.now() + 1000 * 60 * 10)
+        endDate: new Date(date)
       }
     })
 

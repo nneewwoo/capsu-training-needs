@@ -25,6 +25,8 @@
     "@supabase/supabase-js": "^2.47.15",
     "@training-needs/database": "workspace:*",
     "bits-ui": "^0.22.0",
-    "lucide-svelte": "^0.471.0"
+    "date-picker-svelte": "^2.15.1",
+    "lucide-svelte": "^0.471.0",
+    "stwui": "^0.21.2-next"
   }
 }

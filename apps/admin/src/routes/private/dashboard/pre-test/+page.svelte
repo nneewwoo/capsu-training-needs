@@ -1,12 +1,14 @@
 <script lang="ts">
   import { enhance } from '$app/forms'
+  import { Calendar1Icon } from 'lucide-svelte'
+  import { DateInput } from 'date-picker-svelte'
 
   let { data, form } = $props()
 
   let responses = $state(data.responses)
 
   let countdown = $state('')
-
+  let date = $state(new Date(Date.now()))
   const handleCountdown = async () => {
     const endsAt = new Date(data.cycle.endDate).getTime()
 
@@ -44,6 +46,7 @@
   })
 
   $effect(() => {
+    date.setMinutes(date.getMinutes() + 30)
     const PRETEST_CHANNEL = data.supabase
       .channel('pretest-changes')
       .on(
@@ -93,10 +96,18 @@
       <div class="flex flex-col">
         <div
           class="bg-secondary-container flex w-full flex-col rounded-xl border p-2">
-          <h1 class="pb-4 text-center text-sm font-bold">
-            Users are answering pre-test
-          </h1>
-          <h1 class="text-center text-5xl font-bold">{countdown}</h1>
+          {#if countdown !== '--:--:--'}
+            <h1 class="pb-4 text-center text-sm font-bold">
+              Users are answering pre-test
+            </h1>
+            <h1 class="text-center text-5xl font-bold">{countdown}</h1>
+          {:else}
+            <p class="text-base font-medium">Ends at</p>
+            <div class="flex items-center space-x-2">
+              <Calendar1Icon size={16} />
+              <DateInput bind:value={date} />
+            </div>
+          {/if}
         </div>
         <form
           action="?/change-period"
@@ -104,6 +115,7 @@
           use:enhance
           class="mt-4 flex w-full flex-col justify-end">
           <input type="hidden" name="cycleId" value={data.cycle.id} />
+          <input type="hidden" name="date" value={date} />
           <button
             class="disabled:cursor-not-allowed"
             disabled={countdown !== '--:--:--'}
