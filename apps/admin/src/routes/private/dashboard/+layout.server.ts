@@ -9,14 +9,22 @@ export const load: LayoutServerLoad = async () => {
     }
   })
 
-  const cycle = await prisma.baseCycle.findFirst({
+  const activeCycle = await prisma.baseCycle.findFirst({
     where: {
       active: true
     }
   })
 
+  const endDate = new Date(
+    new Date(activeCycle?.endDate || Date.now()).toLocaleString()
+  )
+
+  const cycle = { ...activeCycle, endDate }
+
+  console.log(cycle)
+
   return {
     users,
-    cycle
+    cycle: activeCycle ? cycle : null
   }
 }
