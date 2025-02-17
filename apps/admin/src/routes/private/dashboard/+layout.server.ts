@@ -21,8 +21,6 @@ export const load: LayoutServerLoad = async () => {
 
   const cycle = { ...activeCycle, endDate }
 
-  console.log(cycle)
-
   return {
     users,
     cycle: activeCycle ? cycle : null

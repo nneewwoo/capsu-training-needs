@@ -43,7 +43,13 @@ export const load: LayoutLoad = async ({ fetch, depends }) => {
 
   const participation = (await fetchParticipation.json()) as BaseParticipation
 
-  const cycle = (await response.json()) as BaseCycle
+  const activeCycle = (await response.json()) as BaseCycle
+
+  const endDate = new Date(
+    new Date(activeCycle?.endDate || Date.now()).toLocaleString()
+  )
+
+  const cycle = { ...activeCycle, endDate }
 
   return {
     user,

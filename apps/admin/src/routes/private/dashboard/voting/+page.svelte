@@ -19,8 +19,6 @@
   const handleCountdown = async () => {
     const endsAt = new Date(data.cycle.endDate).getTime()
 
-    console.log(new Date(data.cycle.endDate))
-
     const interval = setInterval(() => {
       const now = new Date().getTime()
       const distance = endsAt - now
