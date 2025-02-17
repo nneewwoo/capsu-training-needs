@@ -10,7 +10,7 @@ const handleAuth: Handle = async ({ event, resolve }) => {
 const allowedOrigins = [
   'http://tauri.localhost',
   'https://capsu-training-needs.tech',
-  'http://192.168.254.106:14141'
+  'http://192.168.254.107:14141'
 ]
 
 const corsHeaders = {

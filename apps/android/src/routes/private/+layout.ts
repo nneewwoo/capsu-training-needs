@@ -53,7 +53,7 @@ export const load: LayoutLoad = async ({ fetch, depends }) => {
 
   return {
     user,
-    cycle,
+    cycle: activeCycle ? cycle : null,
     participation
   }
 }
